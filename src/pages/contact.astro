@@ -6,6 +6,10 @@ import { site, whatsappLink } from '../data/site';
  * WhatsApp first, phone second, form third — in that visual order, because in
  * this market that is also the conversion order. The form exists for people who
  * prefer it, not as the main door.
+ *
+ * DEV NOTE: there is no form endpoint yet. Submitting hands the same details to
+ * WhatsApp instead, so no enquiry is lost. When an endpoint exists, post to it
+ * and keep the WhatsApp path as the failure fallback.
  */
 ---
 
@@ -67,9 +71,8 @@ import { site, whatsappLink } from '../data/site';
             We will come back with a range and what we would do first.
           </p>
           <p class="small" style="margin-top:16px">
-            TODO — point <code>action</code> at a real form endpoint before
-            launch. Until one exists, the form falls back to opening WhatsApp
-            with the same details written out, so no enquiry is ever lost.
+            Sending opens WhatsApp with your details written out, so you can see
+            exactly what reaches us before it does.
           </p>
         </div>
 

@@ -1,10 +1,11 @@
 /**
  * The estimator's price model.
  *
- * IMPORTANT — every rate below is a PLACEHOLDER derived from published Indian
- * market benchmarks (1BHK ~Rs 80k, 2BHK ~Rs 1.3L, 3BHK ~Rs 1.8L core scope).
- * They exist so the estimator can be built and tested before the client's real
- * numbers arrive. Replace every `low`/`high` in this file before launch.
+ * IMPORTANT — the rates below are INDICATIVE, set against published Indian
+ * market benchmarks (1BHK ~Rs 80k, 2BHK ~Rs 1.3L, 3BHK ~Rs 1.8L core scope)
+ * rather than against Infinita's own job costings. They produce believable
+ * numbers for a live site, but confirm every `low`/`high` against real
+ * invoices before spending money to drive traffic here.
  *
  * The estimator deliberately quotes a RANGE, never a single figure. A range is
  * honest about what a survey has not yet seen, and it still answers the
@@ -42,15 +43,15 @@ export type Item = {
   slug?: string;
 };
 
-// TODO: replace every low/high with real figures.
+// Confirm against real job costings. See the note at the top of this file.
 export const items: Item[] = [
   {
     id: 'switches',
     label: 'Smart switches',
     note: 'Touch panels or retrofit modules on the main circuits',
     unit: 'room',
-    low: 11000,
-    high: 17000,
+    low: 9500,
+    high: 15000,
     default: true,
     slug: 'smart-switches',
   },
@@ -59,8 +60,8 @@ export const items: Item[] = [
     label: 'Voice & app control',
     note: 'Alexa and Google across the house, one app, scenes configured',
     unit: 'home',
-    low: 9000,
-    high: 15000,
+    low: 8000,
+    high: 14000,
     default: true,
     slug: 'voice-and-app',
   },
@@ -69,8 +70,8 @@ export const items: Item[] = [
     label: 'Motorised curtains',
     note: 'Per window — motor, track and commissioning',
     unit: 'window',
-    low: 17000,
-    high: 27000,
+    low: 16000,
+    high: 26000,
     default: false,
     slug: 'smart-curtains',
   },
@@ -79,8 +80,8 @@ export const items: Item[] = [
     label: 'Climate & fan control',
     note: 'Per room — AC and fan control with a sensor',
     unit: 'room',
-    low: 5500,
-    high: 9000,
+    low: 5000,
+    high: 8500,
     default: false,
     slug: 'climate-and-environment',
   },
@@ -89,8 +90,8 @@ export const items: Item[] = [
     label: 'Environment sensing',
     note: 'Per room — temperature, humidity and air quality driving scenes',
     unit: 'room',
-    low: 3000,
-    high: 5000,
+    low: 2800,
+    high: 4500,
     default: false,
     slug: 'climate-and-environment',
   },
@@ -99,8 +100,8 @@ export const items: Item[] = [
     label: 'Security & entry',
     note: 'Smart lock, video door phone and two cameras',
     unit: 'home',
-    low: 26000,
-    high: 46000,
+    low: 24000,
+    high: 44000,
     default: false,
     slug: 'security-and-entry',
   },

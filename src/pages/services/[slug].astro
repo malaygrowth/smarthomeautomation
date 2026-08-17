@@ -17,6 +17,7 @@ const bold = (s: string) =>
   s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 
 const others = services.filter((s) => s.slug !== service.slug);
+import { u } from '../../lib/url';
 ---
 
 <Base
@@ -38,7 +39,7 @@ const others = services.filter((s) => s.slug !== service.slug);
         <a class="btn btn--wa" href={whatsappLink(service.name.toLowerCase())} rel="noopener">
           Ask about {service.short.toLowerCase()}
         </a>
-        <a class="btn btn--ghost" href="/#packages">See packages</a>
+        <a class="btn btn--ghost" href={u('/#packages')}>See packages</a>
       </div>
     </div>
   </section>
@@ -97,7 +98,7 @@ const others = services.filter((s) => s.slug !== service.slug);
       <div class="grid grid--3" style="margin-top:26px">
         {
           others.map((s) => (
-            <a class="card" href={`/services/${s.slug}/`}>
+            <a class="card" href={u(`/services/${s.slug}/`)}>
               <h3 class="dsp">{s.name}</h3>
               <p>{s.thesis}</p>
               <span class="price">Read more →</span>

@@ -6,6 +6,7 @@ import { site } from '../../data/site';
 const sorted = [...articles].sort((a, b) => b.updated.localeCompare(a.updated));
 const fmt = (d: string) =>
   new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+import { u } from '../../lib/url';
 ---
 
 <Base
@@ -36,7 +37,7 @@ const fmt = (d: string) =>
         {
           sorted.map((a) => (
             <li>
-              <a href={`/journal/${a.slug}/`}>
+              <a href={u(`/journal/${a.slug}/`)}>
                 <span class="posts__meta">
                   {fmt(a.updated)} · {a.readTime}
                 </span>
@@ -61,7 +62,7 @@ const fmt = (d: string) =>
           call first.
         </p>
         <div style="margin-top:8px">
-          <a class="btn btn--primary" href="/estimate/">Price your home</a>
+          <a class="btn btn--primary" href={u('/estimate/')}>Price your home</a>
         </div>
       </div>
     </div>

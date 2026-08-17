@@ -8,8 +8,11 @@ const citySlug = (c: string) =>
   c.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 /** Built from the data, so a new service or article is never missing from it. */
-export const GET: APIRoute = ({ site: base }) => {
-  const origin = (base ?? new URL('https://example.com')).origin;
+export const GET: APIRoute = ({ site: deployedSite }) => {
+  // Named to avoid shadowing the imported `site` data below.
+  // deployedSite gives the origin; BASE_URL is the subpath Pages serves us from.
+  const origin = (deployedSite ?? new URL('https://example.com')).origin;
+  const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
 
   const paths = [
     '/',
@@ -30,7 +33,7 @@ export const GET: APIRoute = ({ site: base }) => {
 
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${paths.map((p) => `  <url><loc>${origin}${p}</loc></url>`).join('\n')}
+${paths.map((p) => `  <url><loc>${origin}${base}${p}</loc></url>`).join('\n')}
 </urlset>
 `;
 

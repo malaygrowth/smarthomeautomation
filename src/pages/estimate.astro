@@ -11,6 +11,7 @@ import { homeSizes, items, installShare, amcShare } from '../data/pricing';
  * converting path in this market and the one with nothing to maintain.
  */
 const config = { homeSizes, items, installShare, amcShare, whatsapp: site.whatsapp };
+import { u } from '../lib/url';
 ---
 
 <Base
@@ -131,7 +132,7 @@ const config = { homeSizes, items, installShare, amcShare, whatsapp: site.whatsa
           more than you want to spend at once.
         </p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
-          <a class="btn btn--primary" href="/contact/">Talk to us</a>
+          <a class="btn btn--primary" href={u('/contact/')}>Talk to us</a>
           <a class="btn btn--ghost" href={site.phoneHref}>{site.phone}</a>
         </div>
       </div>

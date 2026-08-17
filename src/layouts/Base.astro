@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { site, whatsappLink } from '../data/site';
 import { services } from '../data/services';
+import { u } from '../lib/url';
 
 interface Props {
   title: string;
@@ -15,8 +16,21 @@ interface Props {
 
 const { title, description = site.description, waContext, hideWaFloat = false } = Astro.props;
 const path = Astro.url.pathname;
-const isCurrent = (href: string) =>
-  href === '/' ? path === '/' : path.startsWith(href);
+/** Compare against the based URL, since pathname carries the base too. */
+const isCurrent = (href: string) => {
+  const target = u(href);
+  return href === '/' ? path === target : path.startsWith(target);
+};
+
+/**
+ * The fonts live in public/, so their URLs need the base prefix. CSS files are
+ * not rewritten for base, which is why these two faces are declared here rather
+ * than in global.css.
+ */
+const fontCss = `
+@font-face{font-family:'Oswald';src:url('${u('/fonts/oswald.woff2')}') format('woff2');font-weight:300 700;font-style:normal;font-display:swap}
+@font-face{font-family:'Instrument Serif';src:url('${u('/fonts/instrument-serif-italic.woff2')}') format('woff2');font-weight:400;font-style:italic;font-display:swap}
+`;
 ---
 
 <html lang="en">
@@ -25,23 +39,27 @@ const isCurrent = (href: string) =>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={u('/favicon.svg')} />
     <link rel="canonical" href={new URL(path, Astro.site)} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <link
       rel="preload"
-      href="/fonts/oswald.woff2"
+      href={u('/fonts/oswald.woff2')}
       as="font"
       type="font/woff2"
       crossorigin
     />
+    <style is:inline set:html={fontCss}></style>
   </head>
   <body>
     <header class="masthead">
       <div class="wrap bar">
-        <a class="brand" href="/">{site.name}</a>
+        <a class="brand" href={u('/')} aria-label={`${site.name} — home`}>
+          <img src={u('/mark.svg')} alt="" width="44" height="28" />
+          <span>{site.name}</span>
+        </a>
         <nav class="nav" aria-label="Main">
           {
             [
@@ -53,14 +71,14 @@ const isCurrent = (href: string) =>
             ].map((l) => (
               <a
                 class="nav-secondary"
-                href={l.href}
+                href={u(l.href)}
                 aria-current={isCurrent(l.href) ? 'page' : undefined}
               >
                 {l.label}
               </a>
             ))
           }
-          <a class="nav-cta" href="/estimate/" aria-current={isCurrent('/estimate/') ? 'page' : undefined}>
+          <a class="nav-cta" href={u('/estimate/')} aria-current={isCurrent('/estimate/') ? 'page' : undefined}>
             Get an estimate
           </a>
         </nav>
@@ -80,7 +98,7 @@ const isCurrent = (href: string) =>
               {
                 services.map((s) => (
                   <li>
-                    <a href={`/services/${s.slug}/`}>{s.name}</a>
+                    <a href={u(`/services/${s.slug}/`)}>{s.name}</a>
                   </li>
                 ))
               }
@@ -89,22 +107,22 @@ const isCurrent = (href: string) =>
           <div>
             <h4>Company</h4>
             <ul>
-              <li><a href="/projects/">Projects</a></li>
-              <li><a href="/how-it-works/">How it works</a></li>
-              <li><a href="/service-and-amc/">Service &amp; AMC</a></li>
-              <li><a href="/for-designers/">For architects &amp; designers</a></li>
-              <li><a href="/journal/">Journal</a></li>
-              <li><a href="/privacy/">Privacy, plainly</a></li>
+              <li><a href={u('/projects/')}>Projects</a></li>
+              <li><a href={u('/how-it-works/')}>How it works</a></li>
+              <li><a href={u('/service-and-amc/')}>Service &amp; AMC</a></li>
+              <li><a href={u('/for-designers/')}>For architects &amp; designers</a></li>
+              <li><a href={u('/journal/')}>Journal</a></li>
+              <li><a href={u('/privacy/')}>Privacy, plainly</a></li>
             </ul>
           </div>
           <div>
             <h4>Talk to us</h4>
             <ul>
-              <li><a href="/estimate/">Get an estimate</a></li>
+              <li><a href={u('/estimate/')}>Get an estimate</a></li>
               <li><a href={whatsappLink(waContext)} rel="noopener">WhatsApp</a></li>
               <li><a href={site.phoneHref}>{site.phone}</a></li>
               <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
-              <li><a href="/contact/">Contact</a></li>
+              <li><a href={u('/contact/')}>Contact</a></li>
             </ul>
           </div>
           <div>
@@ -113,7 +131,7 @@ const isCurrent = (href: string) =>
               {
                 site.cities.map((c) => (
                   <li>
-                    <a href={`/areas/${c.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}/`}>
+                    <a href={u(`/areas/${c.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}/`)}>
                       {c}
                     </a>
                   </li>

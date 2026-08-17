@@ -8,12 +8,38 @@ import { site, whatsappLink } from '../data/site';
  * they specify whoever makes them look good.
  */
 const specs = [
-  { label: 'Back boxes', value: 'TODO — depth in mm for touch panels vs retrofit modules' },
-  { label: 'Neutral wire', value: 'Required at every switch position for panels' },
-  { label: 'Curtain pockets', value: 'TODO — clear internal depth and power point position' },
-  { label: 'Network', value: 'One CAT6 run to a central rack, plus an access point per floor' },
-  { label: 'Conduit', value: 'TODO — spare capacity to specify at first fix' },
-  { label: 'Rack space', value: 'TODO — dimensions and ventilation' },
+  {
+    label: 'Back boxes — retrofit',
+    value: 'Standard modular concealed box, 45 mm minimum internal depth, with 25 mm clear behind the wiring for the module',
+  },
+  {
+    label: 'Back boxes — touch panels',
+    value: '6M or 8M box at 50–60 mm internal depth. Below 45 mm a panel will not sit flush and we will recommend retrofit instead',
+  },
+  {
+    label: 'Neutral wire',
+    value: 'Required at every switch position for panels and for most retrofit modules. Please specify at first fix',
+  },
+  {
+    label: 'Curtain pockets',
+    value: '150 mm clear internal depth for a single track, 220 mm for a double. Pelmet returns 100–150 mm from the wall',
+  },
+  {
+    label: 'Curtain power',
+    value: 'A 5A point inside the pocket within 300 mm of the motor end. Battery tracks avoid this but need annual charging',
+  },
+  {
+    label: 'Conduit',
+    value: '25 mm minimum with at least 30% spare capacity, and low-voltage runs in separate conduit from mains',
+  },
+  {
+    label: 'Network',
+    value: 'One CAT6 per floor back to a central point, plus an access point per floor. Wi-Fi alone is not a plan for a villa',
+  },
+  {
+    label: 'Rack',
+    value: '6U wall-mount, 450 mm deep, ventilated, near the incoming ISP point, with a dedicated 5A point and no water above it',
+  },
 ];
 
 const stages = [
@@ -121,9 +147,9 @@ const stages = [
         {specs.map((s) => <div><dt>{s.label}</dt><dd>{s.value}</dd></div>)}
       </dl>
       <p class="small measure" style="margin-top:14px">
-        TODO — replace every TODO above with the client's real installation
-        standards, then offer this page's spec as a downloadable PDF. A document
-        a designer can forward to a contractor is what makes this page earn.
+        These are our standing requirements and they cover most projects. Send
+        us the drawings and we will return them marked up against your actual
+        layout, including anything on this list that your scheme changes.
       </p>
     </div>
   </section>

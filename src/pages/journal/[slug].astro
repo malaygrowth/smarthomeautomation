@@ -14,6 +14,7 @@ const { article } = Astro.props;
 const others = articles.filter((a) => a.slug !== article.slug);
 const fmt = (d: string) =>
   new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+import { u } from '../../lib/url';
 ---
 
 <Base
@@ -67,7 +68,7 @@ const fmt = (d: string) =>
           choose to send it.
         </p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
-          <a class="btn btn--primary" href="/estimate/">Open the estimator</a>
+          <a class="btn btn--primary" href={u('/estimate/')}>Open the estimator</a>
           <a class="btn btn--ghost" href={whatsappLink('a question from your journal')} rel="noopener">
             Ask us instead
           </a>
@@ -83,7 +84,7 @@ const fmt = (d: string) =>
           <div class="sechead"><h2 class="dsp">Also worth reading</h2></div>
           <div class="grid grid--2" style="margin-top:26px">
             {others.map((a) => (
-              <a class="card" href={`/journal/${a.slug}/`}>
+              <a class="card" href={u(`/journal/${a.slug}/`)}>
                 <span class="eyebrow">{a.readTime}</span>
                 <h3 class="dsp">{a.title}</h3>
                 <p>{a.summary}</p>

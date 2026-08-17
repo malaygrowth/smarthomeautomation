@@ -4,7 +4,8 @@ import Placeholder from '../../components/Placeholder.astro';
 import { projects } from '../../data/projects';
 import { site } from '../../data/site';
 
-const anyPlaceholder = projects.some((p) => p.placeholder);
+const anySample = projects.some((p) => p.sample);
+import { u } from '../../lib/url';
 ---
 
 <Base
@@ -32,16 +33,16 @@ const anyPlaceholder = projects.some((p) => p.placeholder);
   <section class="band">
     <div class="wrap">
       {
-        anyPlaceholder && (
+        anySample && (
           <div style="margin-bottom:26px">
-            <Placeholder what="These case studies are templates waiting on real installs." />
+            <Placeholder what="These projects are illustrative." />
           </div>
         )
       }
       <div class="grid grid--3">
         {
           projects.map((p) => (
-            <a class="card" href={`/projects/${p.slug}/`}>
+            <a class="card" href={u(`/projects/${p.slug}/`)}>
               <span class="eyebrow">{p.homeType}</span>
               <h3 class="dsp">{p.name}</h3>
               <p>{p.brief}</p>
@@ -65,8 +66,8 @@ const anyPlaceholder = projects.some((p) => p.placeholder);
           and give you a number before anybody commits to anything.
         </p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
-          <a class="btn btn--primary" href="/estimate/">Estimate it yourself</a>
-          <a class="btn btn--ghost" href="/contact/">Book a survey</a>
+          <a class="btn btn--primary" href={u('/estimate/')}>Estimate it yourself</a>
+          <a class="btn btn--ghost" href={u('/contact/')}>Book a survey</a>
         </div>
       </div>
     </div>

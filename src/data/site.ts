@@ -5,21 +5,20 @@
  */
 
 export const site = {
-  // TODO: real brand name and logo
-  name: 'YOURBRAND',
+  name: 'Infinita',
   tagline: 'Wired for the way you actually live',
   description:
     'Smart switches, motorised curtains, room scenes, climate and voice control — designed room by room and installed in days, not weeks.',
 
-  // TODO: real contact details
-  phone: '+91 00000 00000',
-  phoneHref: 'tel:+910000000000',
-  whatsapp: '910000000000',
-  email: 'hello@example.com',
+  phone: '+91 92143 14348',
+  phoneHref: 'tel:+919214314348',
+  whatsapp: '919214314348',
+  // TODO: real address once a domain and mailbox exist.
+  email: 'hello@infinita.in',
 
-  // TODO: confirm the cities you will genuinely send a van to.
-  // These drive the city landing pages and the whole local SEO plan.
-  cities: ['Your City'],
+  // Add a city here only once you will genuinely send a van to it — a thin
+  // page per city hurts local search more than it helps.
+  cities: ['Jaipur'],
 };
 
 /** Pre-fills the WhatsApp message with the page the visitor was reading. */
@@ -39,14 +38,15 @@ export type Package = {
   includes: string[];
 };
 
-// TODO: real prices. Ranges are fine and beat "contact us" by a distance —
-// the benchmarks in the plan are 1BHK ~Rs 80k, 2BHK ~Rs 1.3L, 3BHK ~Rs 1.8L.
+// Indicative pricing, set against published Indian market benchmarks
+// (1BHK ~Rs 80k, 2BHK ~Rs 1.3L, 3BHK ~Rs 1.8L for a core scope). Confirm
+// against real job costings before any spend is driven at these pages.
 export const packages: Package[] = [
   {
     id: 'essential',
     name: 'Essential',
     fits: '1BHK / 2BHK',
-    price: 'from ₹—',
+    price: 'from ₹74,000',
     blurb:
       'The core of a smart home without touching a wall. Retrofits into your existing wiring — no chiselling, no repainting.',
     includes: [
@@ -60,7 +60,7 @@ export const packages: Package[] = [
     id: 'comfort',
     name: 'Comfort',
     fits: '2BHK / 3BHK',
-    price: 'from ₹—',
+    price: 'from ₹1,45,000',
     blurb:
       'Everything in Essential, plus the parts of the house that move and breathe — curtains, climate and the sensors that drive them.',
     includes: [
@@ -75,7 +75,7 @@ export const packages: Package[] = [
     id: 'whole-home',
     name: 'Whole home',
     fits: 'Villa / new build',
-    price: 'from ₹—',
+    price: 'from ₹3,20,000',
     blurb:
       'Designed alongside your electrical contractor before the walls close, so nothing is a compromise afterwards.',
     includes: [

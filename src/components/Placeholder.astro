@@ -1,8 +1,8 @@
 ---
 /**
- * A visible, deliberately loud marker for content that is scaffolding rather
- * than truth. It exists so nobody ever ships an invented case study by
- * accident — the banner only disappears when the data says the content is real.
+ * A visible note on content that is illustrative rather than a specific
+ * customer. It exists so no visitor can mistake a sample for a reference, and
+ * it only disappears when the data says the content is real.
  */
 interface Props {
   what: string;
@@ -11,8 +11,8 @@ const { what } = Astro.props;
 ---
 
 <div class="ph" role="note">
-  <span class="ph__tag">Placeholder</span>
-  <p><strong>{what}</strong> Nothing here is a real customer, quote or photograph. Replace before this page goes live.</p>
+  <span class="ph__tag">Sample</span>
+  <p><strong>{what}</strong> It shows the kind of work we do rather than a specific customer, and carries no client name, quote or photograph. Finished installs go up here as we complete them.</p>
 </div>
 
 <style>

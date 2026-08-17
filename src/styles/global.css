@@ -8,22 +8,12 @@
 
    Every colour is painted explicitly so the page never borrows a
    host background. See docs/plan.html for the reasoning.
+
+   The @font-face rules live in Base.astro, not here: CSS URLs are not
+   rewritten for the deploy base, and GitHub Pages serves this site from
+   a subpath.
    ============================================================ */
 
-@font-face {
-  font-family: 'Oswald';
-  src: url('/fonts/oswald.woff2') format('woff2');
-  font-weight: 300 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Instrument Serif';
-  src: url('/fonts/instrument-serif-italic.woff2') format('woff2');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
 
 :root {
   /* ground + surfaces */
@@ -251,6 +241,9 @@ strong { font-weight: 650; color: var(--ink); }
   padding: 15px 0;
 }
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
   font-family: var(--display);
   font-weight: 600;
   text-transform: uppercase;
@@ -259,6 +252,11 @@ strong { font-weight: 650; color: var(--ink); }
   text-decoration: none;
   color: var(--ink);
   white-space: nowrap;
+}
+.brand img { width: 44px; height: auto; display: block; }
+@media (max-width: 460px) {
+  .brand { gap: 8px; font-size: 0.9rem; }
+  .brand img { width: 34px; }
 }
 .nav {
   display: flex;

@@ -1,8 +1,10 @@
-# Smart home automation — website
+# Infinita — website
 
-Marketing site for the smart home automation business: smart switches,
-motorised curtains, room scenes, climate and environment control, voice
-integration, and security/entry.
+Marketing site for Infinita, a smart home automation business in Jaipur:
+smart switches, motorised curtains, room scenes, climate and environment
+control, voice integration, and security/entry.
+
+**Live:** https://malaygrowth.github.io/smarthomeautomation/
 
 ## Read this first
 
@@ -20,8 +22,24 @@ npm run build    # static output in dist/
 npm run preview  # serve the build
 ```
 
-Astro, static output, no runtime server. Deploy `dist/` to Vercel, Netlify,
-Cloudflare Pages or any static host.
+Astro, static output, no runtime server.
+
+## Deployment
+
+Every push to `main` builds and publishes to GitHub Pages via
+`.github/workflows/deploy.yml`. Pages must be set to **Build and deployment →
+Source → GitHub Actions** in repository settings for the deploy step to succeed.
+
+Because Pages serves the site from `/smarthomeautomation/`, `astro.config.mjs`
+sets `base` and **every internal link goes through `u()` in `src/lib/url.ts`**.
+Write `href={u('/estimate/')}`, never `href="/estimate/"` — a raw absolute path
+will 404 in production while looking fine in `astro dev`.
+
+When a real domain arrives: set `site` to it, set `base: '/'`, update
+`public/robots.txt`, and every link follows automatically.
+
+The `@font-face` rules live in `src/layouts/Base.astro` rather than in
+`global.css`, because CSS URLs are not rewritten for the base path.
 
 ## How it's put together
 
@@ -58,6 +76,14 @@ public/fonts/         Oswald + Instrument Serif Italic, self-hosted
 
 **Content lives in `src/data`, not in templates.** Changing a price, a phone
 number or a paragraph of service copy never means editing markup.
+
+### Brand
+
+Infinita's mark is an infinity path drawn as a single continuous circuit — the
+name, and the product: a house wired to run without anybody thinking about it.
+`public/logo.svg` is the full lockup with the wordmark's font embedded, so it
+renders correctly anywhere. `public/mark.svg` is the mark alone, used in the
+site header. It stays legible down to 16px.
 
 ### The design system — "Switchplate"
 
@@ -98,25 +124,18 @@ light) so a dark room at midday and a lit room at night both read correctly.
 
 ## Still to do
 
-Waiting on client input (see the plan's closing section):
+**Content that is indicative, not confirmed:**
 
-- [ ] Real brand name, logo, contact details, service cities — all in `src/data/site.ts`, marked `TODO`
-- [ ] Real package prices, currently `from ₹—`
-- [ ] Project photography — the highest-value missing asset
+- [ ] Prices — `src/data/pricing.ts` rates and the three package prices in `src/data/site.ts` are set against published market benchmarks, not against Infinita's own job costings. Confirm before spending money to drive traffic here.
+- [ ] Case studies — the three in `src/data/projects.ts` are marked `sample: true` and render a visible "Sample" note. Replace with real installs and set `sample: false`.
+- [ ] Photography — still the highest-value missing asset. Nothing on the site uses a photograph yet.
+- [ ] `hello@infinita.in` is a placeholder address.
 
-Built, and needing real content before launch:
+**Not started:**
 
-- [ ] Replace every rate in `src/data/pricing.ts` — all placeholders
-- [ ] Replace the three case studies in `src/data/projects.ts` with real installs; they render a loud Placeholder banner until you do
-- [ ] Fill the TODOs on `for-designers` with your real installation standards, and offer the spec as a downloadable PDF
-- [ ] Put a real response-time commitment on `service-and-amc`
-- [ ] Give each city page local specifics — a thin page per city hurts more than it helps
-- [ ] Point the contact form at a real endpoint (it falls back to WhatsApp until then, so no enquiry is lost)
-- [ ] Add the formal legal notice under the plain-language privacy page
-- [ ] Set the real domain in `astro.config.mjs` and `public/robots.txt`
-
-Not started:
-
+- [ ] Contact form endpoint — submitting currently hands the details to WhatsApp, so no enquiry is lost
+- [ ] The formal legal notice under the plain-language privacy page
 - [ ] Emailed PDF of the estimate
 - [ ] Analytics and call tracking
+- [ ] Google Business Profile — for a service-area business this often out-performs the website for calls
 - [ ] More journal articles — the two here are the highest-intent queries

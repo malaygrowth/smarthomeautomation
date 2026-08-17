@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { services } from '../../data/services';
 import { site, packages } from '../../data/site';
+import { u } from '../../lib/url';
 ---
 
 <Base
@@ -31,7 +32,7 @@ import { site, packages } from '../../data/site';
       <div class="grid grid--2">
         {
           services.map((s) => (
-            <a class="card" href={`/services/${s.slug}/`}>
+            <a class="card" href={u(`/services/${s.slug}/`)}>
               <h2 class="dsp" style="font-size:1.5rem">{s.name}</h2>
               <p class="accent-line" style="font-size:1.05rem">{s.thesis}</p>
               <p>{s.lede}</p>
@@ -59,8 +60,8 @@ import { site, packages } from '../../data/site';
         }
       </div>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px">
-        <a class="btn btn--primary" href="/estimate/">Price your home</a>
-        <a class="btn btn--ghost" href="/how-it-works/">See how it works</a>
+        <a class="btn btn--primary" href={u('/estimate/')}>Price your home</a>
+        <a class="btn btn--ghost" href={u('/how-it-works/')}>See how it works</a>
       </div>
     </div>
   </section>

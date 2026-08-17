@@ -2,7 +2,11 @@
 import Base from '../layouts/Base.astro';
 import SceneDemo from '../components/SceneDemo.astro';
 import { site, packages, whatsappLink } from '../data/site';
+
+/** Keep the hero's price signal tied to the package data, never retyped. */
+const entry = packages[0];
 import { services } from '../data/services';
+import { u } from '../lib/url';
 ---
 
 <Base title={`${site.name} — ${site.tagline}`}>
@@ -25,7 +29,7 @@ import { services } from '../data/services';
         <a class="btn btn--ghost" href={whatsappLink()} rel="noopener">Ask on WhatsApp</a>
       </div>
       <div class="facts">
-        <span class="chip chip--brass">2BHK from ₹—</span>
+        <span class="chip chip--brass">{entry.fits.split(' / ').pop()} {entry.price}</span>
         <span class="chip">Most homes installed in 4 days</span>
         <span class="chip chip--teal">Manual switches always work</span>
       </div>
@@ -58,7 +62,7 @@ import { services } from '../data/services';
       <div class="grid grid--3" style="margin-top:28px">
         {
           services.map((s) => (
-            <a class="card" href={`/services/${s.slug}/`}>
+            <a class="card" href={u(`/services/${s.slug}/`)}>
               <h3 class="dsp">{s.name}</h3>
               <p>{s.thesis}</p>
               <span class="price">Read more →</span>

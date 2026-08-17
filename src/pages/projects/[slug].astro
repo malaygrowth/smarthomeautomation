@@ -13,6 +13,7 @@ export function getStaticPaths() {
 
 const { project } = Astro.props;
 const others = projects.filter((p) => p.slug !== project.slug);
+import { u } from '../../lib/url';
 ---
 
 <Base
@@ -32,10 +33,10 @@ const others = projects.filter((p) => p.slug !== project.slug);
   </section>
 
   {
-    project.placeholder && (
+    project.sample && (
       <section class="band band--tight">
         <div class="wrap">
-          <Placeholder what="This is a case-study template, not a finished job." />
+          <Placeholder what="This project is illustrative." />
         </div>
       </section>
     )
@@ -94,7 +95,7 @@ const others = projects.filter((p) => p.slug !== project.slug);
           <div class="sechead"><h2 class="dsp">Other homes</h2></div>
           <div class="grid grid--2" style="margin-top:26px">
             {others.map((p) => (
-              <a class="card" href={`/projects/${p.slug}/`}>
+              <a class="card" href={u(`/projects/${p.slug}/`)}>
                 <span class="eyebrow">{p.homeType}</span>
                 <h3 class="dsp">{p.name}</h3>
                 <span class="price">
@@ -117,7 +118,7 @@ const others = projects.filter((p) => p.slug !== project.slug);
           <a class="btn btn--wa" href={whatsappLink('a project like this')} rel="noopener">
             Message us
           </a>
-          <a class="btn btn--ghost" href="/estimate/">Estimate your home</a>
+          <a class="btn btn--ghost" href={u('/estimate/')}>Estimate your home</a>
         </div>
       </div>
     </div>

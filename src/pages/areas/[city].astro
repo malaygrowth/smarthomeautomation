@@ -20,6 +20,7 @@ export function getStaticPaths() {
 }
 
 const { city } = Astro.props;
+import { u } from '../../lib/url';
 ---
 
 <Base
@@ -44,7 +45,7 @@ const { city } = Astro.props;
         <a class="btn btn--wa" href={whatsappLink(`home automation in ${city}`)} rel="noopener">
           Book a survey in {city}
         </a>
-        <a class="btn btn--ghost" href="/estimate/">Price it first</a>
+        <a class="btn btn--ghost" href={u('/estimate/')}>Price it first</a>
       </div>
     </div>
   </section>
@@ -52,10 +53,16 @@ const { city } = Astro.props;
   <section class="band">
     <div class="wrap">
       <div class="sechead"><h2 class="dsp">What we install in {city}</h2></div>
+      <p class="lede measure" style="margin-top:16px">
+        Most of our work here is retrofit — flats in Mansarovar, Jagatpura,
+        Vaishali Nagar and Malviya Nagar where the family is already living in
+        the place and nobody wants chiselled walls. Newer builds and villas we
+        prefer to specify at first fix, alongside your electrician.
+      </p>
       <div class="grid grid--3" style="margin-top:26px">
         {
           services.map((s) => (
-            <a class="card" href={`/services/${s.slug}/`}>
+            <a class="card" href={u(`/services/${s.slug}/`)}>
               <h3 class="dsp">{s.name}</h3>
               <p>{s.thesis}</p>
               <span class="price">Read more →</span>
@@ -82,10 +89,9 @@ const { city } = Astro.props;
         }
       </div>
       <p class="small measure" style="margin-top:16px">
-        TODO — this page needs local specifics before it will rank or convert:
-        the localities covered, a real project in {city}, and a note on
-        apartment types common here. A city page that only swaps the name is the
-        fastest way to get all of them ignored.
+        Prices are for the core scope and exclude civil and electrical work. Your
+        number comes from the survey — the estimator will get you close before
+        anybody visits.
       </p>
     </div>
   </section>
