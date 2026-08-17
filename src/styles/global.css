@@ -35,14 +35,32 @@
   --rule-soft: #e2ded6;
   --rule-night: #232a32;
 
-  /* accent — brass lamplight, used once per view */
-  --brass: #9a6420;
+  /* ------------------------------------------------------------------
+     Accents follow the Kelvin rule from the design document: the WARM
+     accent belongs to comfort — lighting, scenes, living, evening. The
+     COOL accent belongs to control — security, sensing, energy, specs.
+     Never mix them inside a single component.
+
+     The document's values (--k-1800 #E9A83C, --k-5000 #8FB3CC) are set
+     for a near-black ground and fail contrast on plaster, so each accent
+     has a light-surface and a dark-surface value. Same hue family, same
+     meaning, legible on both.
+     ------------------------------------------------------------------ */
+
+  /* warm · comfort · 1800K candle */
+  --brass: #9a6420;        /* on light surfaces */
   --brass-bright: #b4762a;
+  --k-1800: #e9a83c;       /* on --night */
   --brass-wash: #f0e7d9;
 
-  /* secondary — the "connected" signal */
-  --teal: #0f5d58;
-  --teal-wash: #dfe9e7;
+  /* cool · control · 5000K daylight */
+  --cool: #2c5a78;         /* on light surfaces */
+  --k-5000: #8fb3cc;       /* on --night */
+  --cool-wash: #e2eaf0;
+
+  /* WhatsApp is a brand affordance, not a semantic accent */
+  --wa: #12796c;
+  --wa-dark: #0d5c52;
 
   /* type */
   --display: 'Oswald', ui-sans-serif, system-ui, sans-serif;
@@ -86,7 +104,7 @@ a {
 }
 
 :focus-visible {
-  outline: 2px solid var(--teal);
+  outline: 2px solid var(--cool);
   outline-offset: 3px;
 }
 
@@ -117,12 +135,13 @@ a {
 .band--paper { background: var(--paper); }
 
 /* ---------- type ---------- */
+/* Display headings are sentence case. Caps survive only on eyebrows and
+   small utility labels — the design document's one permitted exception. */
 .dsp {
   font-family: var(--display);
   font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.015em;
-  line-height: 1.03;
+  letter-spacing: -0.005em;
+  line-height: 1.06;
   text-wrap: balance;
   margin: 0;
 }
@@ -204,10 +223,10 @@ strong { font-weight: 650; color: var(--ink); }
 }
 .btn--ghost:hover { border-color: var(--brass); color: var(--brass); }
 .btn--wa {
-  background: var(--teal);
+  background: var(--wa);
   color: #fff;
 }
-.btn--wa:hover { background: #0c4a46; }
+.btn--wa:hover { background: var(--wa-dark); }
 
 /* ---------- chips ---------- */
 .chip {
@@ -222,7 +241,7 @@ strong { font-weight: 650; color: var(--ink); }
   border: 1px solid var(--rule);
   color: var(--ink-2);
 }
-.chip--teal { color: var(--teal); }
+.chip--cool { color: var(--cool); }
 .chip--brass { color: var(--brass); }
 
 /* ---------- header ---------- */
@@ -433,7 +452,7 @@ a.card:hover {
   padding: 56px 0 40px;
 }
 .foot a { color: var(--ink-on-night); text-decoration: none; }
-.foot a:hover { color: #f0b65f; }
+.foot a:hover { color: var(--k-1800); }
 .foot .cols {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
@@ -621,7 +640,7 @@ a.card:hover {
   font-style: italic;
   font-size: clamp(1.15rem, 2vw, 1.5rem);
   line-height: 1.3;
-  color: #f0b65f;
+  color: var(--k-1800);
   max-width: 26ch;
 }
 .bento__lede {
@@ -647,7 +666,7 @@ a.card:hover {
   font-size: 0.7rem;
   color: var(--brass);
 }
-.bento__feature .bento__more { color: #f0b65f; }
+.bento__feature .bento__more { color: var(--k-1800); }
 
 /* scene names inside the flagship tile — fills the space with the product itself */
 .bento__scenes {
@@ -722,5 +741,5 @@ a.card:hover {
   top: 0.55em;
   width: 5px;
   height: 5px;
-  background: var(--teal);
+  background: var(--cool);
 }

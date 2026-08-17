@@ -14,7 +14,9 @@ interface Props {
   onNight?: boolean;
 }
 const { slug, onNight = false } = Astro.props;
-const stroke = onNight ? '#e0a24c' : '#9a6420';
+// Literal hex, not a CSS variable: var() does not resolve inside SVG
+// presentation attributes. These two mirror --k-1800 and --brass.
+const stroke = onNight ? '#e9a83c' : '#9a6420';
 const faint = onNight ? 'rgba(233,230,225,.28)' : 'rgba(20,23,28,.22)';
 ---
 

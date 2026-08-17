@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { site, whatsappLink } from '../data/site';
+import { site, stages, whatsappLink } from '../data/site';
 
 /**
  * WhatsApp first, phone second, form third — in that visual order, because in
@@ -40,10 +40,10 @@ import { site, whatsappLink } from '../data/site';
     <div class="wrap">
       <div class="grid grid--3">
         <a class="card contact-card" href={whatsappLink('booking a survey')} rel="noopener">
-          <span class="eyebrow" style="color:var(--teal)">Fastest</span>
+          <span class="eyebrow" style="color:var(--wa)">Fastest</span>
           <h2 class="dsp">WhatsApp</h2>
           <p>Send photos, ask a question, book a survey. Usually answered the same day.</p>
-          <span class="price" style="color:var(--teal)">Open WhatsApp →</span>
+          <span class="price" style="color:var(--wa)">Open WhatsApp →</span>
         </a>
         <a class="card contact-card" href={site.phoneHref}>
           <span class="eyebrow">Prefer to talk</span>
@@ -94,6 +94,12 @@ import { site, whatsappLink } from '../data/site';
               <option>4 BHK</option>
               <option>Villa / duplex</option>
               <option>Commercial space</option>
+            </select>
+          </label>
+          <label>
+            <span class="eyebrow">Stage of the property</span>
+            <select name="stage">
+              {stages.map((st) => <option value={st.id}>{st.label}</option>)}
             </select>
           </label>
           <label>
@@ -187,6 +193,7 @@ import { site, whatsappLink } from '../data/site';
         `Name: ${name}\n` +
         `Phone: ${phone}\n` +
         `Home: ${data.get('home')}\n` +
+        `Stage: ${form.querySelector<HTMLSelectElement>('[name=stage]')?.selectedOptions[0]?.text ?? '—'}\n` +
         `Looking for: ${String(data.get('message') ?? '').trim() || '—'}`;
       const target = form.dataset.whatsapp;
       if (!target) {

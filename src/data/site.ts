@@ -51,6 +51,24 @@ export const commitments = [
 /** Real, verifiable counts. Add when you have them; renders only if non-empty. */
 export const metrics: { value: string; unit: string; label: string }[] = [];
 
+/**
+ * Stage of construction — the single highest-leverage question on the site.
+ *
+ * Automation sales are gated by construction stage: a lead at "electrical in
+ * progress" is worth an order of magnitude more than one at "ready to move",
+ * and it is a completely different sales conversation. `qualified` marks the
+ * stages where we can still influence the wiring, which is the definition the
+ * enquiry KPI should be measured against — not total form fills.
+ */
+export const stages = [
+  { id: 'planning', label: 'Planning or design', qualified: false },
+  { id: 'civil', label: 'Civil work underway', qualified: true },
+  { id: 'electrical', label: 'Electrical in progress', qualified: true },
+  { id: 'interiors', label: 'Interiors in progress', qualified: true },
+  { id: 'handover', label: 'Close to handover', qualified: false },
+  { id: 'living', label: 'Already living here', qualified: false },
+];
+
 export type Package = {
   id: string;
   name: string;

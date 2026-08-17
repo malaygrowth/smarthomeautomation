@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { site } from '../data/site';
+import { site, stages } from '../data/site';
 import { homeSizes, items, installShare, amcShare } from '../data/pricing';
 
 /**
@@ -57,6 +57,12 @@ import { u } from '../lib/url';
               ))
             }
           </div>
+          <label class="stage">
+            <span class="eyebrow">Stage of the property</span>
+            <select id="stage">
+              {stages.map((st) => <option value={st.id}>{st.label}</option>)}
+            </select>
+          </label>
           <div class="counts">
             <label>
               <span class="eyebrow">Rooms to automate</span>
@@ -180,6 +186,21 @@ import { u } from '../lib/url';
     color: var(--paper);
   }
 
+  .stage {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 18px;
+  }
+  .stage select {
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 10px 12px;
+    border: 1px solid var(--rule);
+    background: var(--plaster);
+    color: var(--ink);
+    width: 100%;
+  }
   .counts {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -240,7 +261,7 @@ import { u } from '../lib/url';
     line-height: 1.05;
     letter-spacing: 0.01em;
     font-variant-numeric: tabular-nums;
-    color: #f0b65f;
+    color: var(--k-1800);
   }
   .est__sub { font-size: 0.9rem; line-height: 1.5; color: var(--muted-on-night); }
 
@@ -295,6 +316,7 @@ import { u } from '../lib/url';
       '₹' + Math.round(n).toLocaleString('en-IN', { maximumFractionDigits: 0 });
 
     const roomsEl = root.querySelector<HTMLInputElement>('#rooms')!;
+    const stageEl = root.querySelector<HTMLSelectElement>('#stage');
     const windowsEl = root.querySelector<HTMLInputElement>('#windows')!;
     const sizeBtns = root.querySelectorAll<HTMLButtonElement>('.sizebtn');
     const picks = root.querySelectorAll<HTMLInputElement>('.pick input');
@@ -367,6 +389,7 @@ import { u } from '../lib/url';
         `Hi, I used the estimator on your site.\n\n` +
         `Home: ${currentSize()?.textContent?.trim() ?? '—'}\n` +
         `Rooms: ${rooms}\n` +
+        `Stage: ${stageEl?.selectedOptions[0]?.text ?? '—'}\n` +
         (chosen.includes('curtains') ? `Windows: ${windows}\n` : '') +
         `Wanted: ${cfg.items.filter((i) => chosen.includes(i.id)).map((i) => i.label).join(', ')}\n` +
         `Estimate shown: ${inr(totalLow)}–${inr(totalHigh)}\n\n` +
@@ -387,6 +410,7 @@ import { u } from '../lib/url';
       }),
     );
     [roomsEl, windowsEl].forEach((el) => el.addEventListener('input', render));
+    stageEl?.addEventListener('change', render);
     picks.forEach((p) => p.addEventListener('change', render));
 
     render();
