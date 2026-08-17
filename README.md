@@ -1,6 +1,6 @@
-# Infinita — website
+# Freedom Infinity — website
 
-Marketing site for Infinita, a smart home automation business in Jaipur:
+Marketing site for Freedom Infinity, a smart home automation business in Jaipur:
 smart switches, motorised curtains, room scenes, climate and environment
 control, voice integration, and security/entry.
 
@@ -79,7 +79,7 @@ number or a paragraph of service copy never means editing markup.
 
 ### Brand
 
-Infinita's mark is an infinity path drawn as a single continuous circuit — the
+Freedom Infinity's mark is an infinity path drawn as a single continuous circuit — the
 name, and the product: a house wired to run without anybody thinking about it.
 `public/logo.svg` is the full lockup with the wordmark's font embedded, so it
 renders correctly anywhere. `public/mark.svg` is the mark alone, used in the
@@ -126,10 +126,10 @@ light) so a dark room at midday and a lit room at night both read correctly.
 
 **Content that is indicative, not confirmed:**
 
-- [ ] Prices — `src/data/pricing.ts` rates and the three package prices in `src/data/site.ts` are set against published market benchmarks, not against Infinita's own job costings. Confirm before spending money to drive traffic here.
+- [ ] Prices — `src/data/pricing.ts` rates and the three package prices in `src/data/site.ts` are set against published market benchmarks, not against Freedom Infinity's own job costings. Confirm before spending money to drive traffic here.
 - [ ] Case studies — the three in `src/data/projects.ts` are marked `sample: true` and render a visible "Sample" note. Replace with real installs and set `sample: false`.
 - [ ] Photography — still the highest-value missing asset. Nothing on the site uses a photograph yet.
-- [ ] `hello@infinita.in` is a placeholder address.
+- [ ] Confirm `hello@freedominfinityautomation.com` exists as a mailbox.
 
 **Not started:**
 

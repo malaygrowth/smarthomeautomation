@@ -5,8 +5,10 @@
  */
 
 export const site = {
-  name: 'Infinita',
-  tagline: 'Wired for the way you actually live',
+  name: 'Freedom Infinity',
+  tagline: 'Smart living. Limitless possibilities.',
+  /** Used in the header lockup, stacked over two lines */
+  wordmark: ['Freedom', 'Infinity'],
   description:
     'Smart switches, motorised curtains, room scenes, climate and voice control — designed room by room and installed in days, not weeks.',
 
@@ -14,7 +16,9 @@ export const site = {
   phoneHref: 'tel:+919214314348',
   whatsapp: '919214314348',
   // TODO: real address once a domain and mailbox exist.
-  email: 'hello@infinita.in',
+  // The brochure lists freedominfinityautomation.com as the live site.
+  // TODO: confirm this mailbox exists before launch.
+  email: 'hello@freedominfinityautomation.com',
 
   // Add a city here only once you will genuinely send a van to it — a thin
   // page per city hurts local search more than it helps.
@@ -35,7 +39,7 @@ export function whatsappLink(context?: string) {
  * Deliberately built from COMMITMENTS rather than vanity metrics. "200 homes
  * completed" is the industry convention and it is unverifiable — putting a
  * number we cannot stand behind on a live site is a liability, not a trust
- * signal. Everything below is a promise Infinita controls and already makes
+ * signal. Everything below is a promise Freedom Infinity controls and already makes
  * elsewhere on the site, so the two can never contradict each other.
  *
  * When there ARE real numbers — homes finished, years trading — add them to

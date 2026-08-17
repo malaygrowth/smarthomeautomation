@@ -57,8 +57,10 @@ const fontCss = `
     <header class="masthead">
       <div class="wrap bar">
         <a class="brand" href={u('/')} aria-label={`${site.name} — home`}>
-          <img src={u('/mark.svg')} alt="" width="44" height="28" />
-          <span>{site.name}</span>
+          <img src={u('/mark.svg')} alt="" width="42" height="27" />
+          <span class="brand__name">
+            {site.wordmark.map((w) => <em>{w}</em>)}
+          </span>
         </a>
         <nav class="nav" aria-label="Main">
           {

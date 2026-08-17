@@ -2,7 +2,7 @@
  * Case studies.
  *
  * Every entry is currently marked `sample: true` — the work described is
- * representative of what Infinita installs, but no entry is a specific
+ * representative of what Freedom Infinity installs, but no entry is a specific
  * customer, and none carries an invented quote or testimonial. Pages render a
  * visible "Sample project" note while that flag is set, so nothing here can be
  * mistaken for a real reference.

@@ -2,7 +2,7 @@
  * The actual product range, taken from the company brochure.
  *
  * This replaces guesswork. Until now the site described six generic services
- * invented from market research; this is what Infinita genuinely sells, in the
+ * invented from market research; this is what Freedom Infinity genuinely sells, in the
  * brochure's own order, with the brochure's own feature claims.
  *
  * Three things the brochure taught us that the site did not know:

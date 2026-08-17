@@ -3,7 +3,7 @@
  *
  * IMPORTANT — the rates below are INDICATIVE, set against published Indian
  * market benchmarks (1BHK ~Rs 80k, 2BHK ~Rs 1.3L, 3BHK ~Rs 1.8L core scope)
- * rather than against Infinita's own job costings. They produce believable
+ * rather than against Freedom Infinity's own job costings. They produce believable
  * numbers for a live site, but confirm every `low`/`high` against real
  * invoices before spending money to drive traffic here.
  *

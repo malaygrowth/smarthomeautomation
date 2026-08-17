@@ -272,10 +272,23 @@ strong { font-weight: 650; color: var(--ink); }
   color: var(--ink);
   white-space: nowrap;
 }
-.brand img { width: 44px; height: auto; display: block; }
+.brand img { width: 42px; height: auto; display: block; }
+/* Two words stacked — "Freedom Infinity" on one line crowds the nav */
+.brand__name {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.02;
+}
+.brand__name em {
+  font-style: normal;
+  font-size: 0.82rem;
+  letter-spacing: 0.19em;
+}
+.brand__name em:last-child { color: var(--brass); }
 @media (max-width: 460px) {
-  .brand { gap: 8px; font-size: 0.9rem; }
+  .brand { gap: 8px; }
   .brand img { width: 34px; }
+  .brand__name em { font-size: 0.72rem; letter-spacing: 0.15em; }
 }
 .nav {
   display: flex;
