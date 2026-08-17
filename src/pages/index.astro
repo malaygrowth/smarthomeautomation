@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import SceneDemo from '../components/SceneDemo.astro';
 import SwitchPlate from '../components/SwitchPlate.astro';
 import ServiceGlyph from '../components/ServiceGlyph.astro';
+import { sectors } from '../data/products';
 import { site, packages, commitments, metrics, scenes, whatsappLink } from '../data/site';
 
 /** Keep the hero's price signal tied to the package data, never retyped. */
@@ -114,6 +115,34 @@ import { u } from '../lib/url';
     </div>
   </section>
 
+
+
+  <section class="band" id="sectors">
+    <div class="wrap">
+      <div class="sechead"><h2 class="dsp">Homes, hotels, hospitals</h2></div>
+      <div class="measure" style="margin-top:16px">
+        <p class="lede">
+          The same hardware, three very different briefs. A hotel wants a room
+          that costs nothing while it is empty; a hospital wants a switch nobody
+          has to reach.
+        </p>
+      </div>
+      <div class="sectors">
+        {
+          sectors.map((sec) => (
+            <article class="sector">
+              <span class="eyebrow">{sec.name}</span>
+              <h3 class="dsp">{sec.line}</h3>
+              <p>{sec.body}</p>
+              <ul>
+                {sec.points.map((pt) => <li>{pt}</li>)}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
   <section class="band band--paper" id="wall">
     <div class="wrap">

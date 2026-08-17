@@ -677,3 +677,50 @@ a.card:hover {
   font-size: 0.85rem;
   padding-left: 2px;
 }
+
+/* ---------- sectors: homes / hotels / hospitals ---------- */
+.sectors {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(268px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-top: 30px;
+}
+.sector {
+  background: var(--plaster);
+  padding: 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sector h3 { font-size: 1.25rem; text-transform: none; letter-spacing: 0; }
+.sector p {
+  font-size: 0.94rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.sector ul {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.sector li {
+  position: relative;
+  padding-left: 15px;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.sector li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 5px;
+  height: 5px;
+  background: var(--teal);
+}

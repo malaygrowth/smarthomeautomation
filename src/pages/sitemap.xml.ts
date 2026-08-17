@@ -18,6 +18,7 @@ export const GET: APIRoute = ({ site: deployedSite }) => {
     '/',
     '/services/',
     ...services.map((s) => `/services/${s.slug}/`),
+    '/products/',
     '/projects/',
     ...projects.map((p) => `/projects/${p.slug}/`),
     '/journal/',

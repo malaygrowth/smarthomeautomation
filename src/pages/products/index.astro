@@ -1,0 +1,227 @@
+---
+import Base from '../../layouts/Base.astro';
+import { products, sectors } from '../../data/products';
+import { site, whatsappLink } from '../../data/site';
+import { u } from '../../lib/url';
+
+const comfort = products.filter((p) => p.lane === 'comfort');
+const control = products.filter((p) => p.lane === 'control');
+---
+
+<Base
+  title={`Products — ${site.name}`}
+  description="Smart switches, ZigBee touch panels, curtain motors, IR blasters, step lighting, presence sensors and PDLC smart film — for homes, hotels and hospitals."
+  waContext="your product range"
+>
+  <section class="hero">
+    <div class="wrap">
+      <div class="brass-rule"></div>
+      <p class="eyebrow" style="margin-top:16px">Products</p>
+      <h1 class="dsp" style="font-size:clamp(2.2rem,5.4vw,4rem)">
+        Nine things<br />we fit
+      </h1>
+      <div class="measure" style="margin-top:22px">
+        <p class="lede">
+          The full range, named plainly. Most homes use three or four of these;
+          hotels and hospitals usually want a different three.
+        </p>
+      </div>
+      <div class="facts">
+        {sectors.map((s) => <span class="chip">{s.name}</span>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="sechead"><h2 class="dsp">Comfort</h2></div>
+      <p class="lede measure" style="margin-top:16px">
+        Light, air, curtains and the things you touch. What the house does for
+        the people in it.
+      </p>
+      <div class="prods">
+        {
+          comfort.map((p) => (
+            <article class="prod">
+              <div class="prod__head">
+                <span class="prod__n">{String(p.n).padStart(2, '0')}</span>
+                <div>
+                  <h3 class="dsp">{p.name}</h3>
+                  {p.qualifier && <span class="prod__q">{p.qualifier}</span>}
+                </div>
+              </div>
+              <p class="prod__line">{p.line}</p>
+              <ul class="prod__features">
+                {p.features.map((f) => <li>{f}</li>)}
+              </ul>
+              <div class="prod__foot">
+                <span class="prod__sectors">{p.sectors.join(' · ')}</span>
+                {p.service && (
+                  <a class="prod__link" href={u(`/services/${p.service}/`)}>
+                    How we fit it &rarr;
+                  </a>
+                )}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--paper">
+    <div class="wrap">
+      <div class="sechead"><h2 class="dsp">Control</h2></div>
+      <p class="lede measure" style="margin-top:16px">
+        Sensing and privacy. What the building decides on its own, and what it
+        saves while nobody is in the room.
+      </p>
+      <div class="prods">
+        {
+          control.map((p) => (
+            <article class="prod prod--control">
+              <div class="prod__head">
+                <span class="prod__n">{String(p.n).padStart(2, '0')}</span>
+                <div>
+                  <h3 class="dsp">{p.name}</h3>
+                  {p.qualifier && <span class="prod__q">{p.qualifier}</span>}
+                </div>
+              </div>
+              <p class="prod__line">{p.line}</p>
+              <ul class="prod__features">
+                {p.features.map((f) => <li>{f}</li>)}
+              </ul>
+              <div class="prod__foot">
+                <span class="prod__sectors">{p.sectors.join(' · ')}</span>
+                {p.service && (
+                  <a class="prod__link" href={u(`/services/${p.service}/`)}>
+                    How we fit it &rarr;
+                  </a>
+                )}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--tight">
+    <div class="wrap">
+      <div class="stack g16 measure">
+        <div class="brass-rule"></div>
+        <h2 class="dsp">Not sure which you need?</h2>
+        <p class="lede">
+          That is what the survey is for. Send a photo of your switchboard and
+          tell us the rooms — we will tell you which three of these actually
+          change your day.
+        </p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+          <a class="btn btn--wa" href={whatsappLink('your product range')} rel="noopener">
+            Ask on WhatsApp
+          </a>
+          <a class="btn btn--ghost" href={u('/estimate/')}>Price your home</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .prods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 16px;
+    margin-top: 30px;
+  }
+  .prod {
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  :global(.band--paper) .prod { background: var(--plaster); }
+
+  .prod__head { display: flex; gap: 14px; align-items: baseline; }
+  .prod__n {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: var(--brass);
+    font-variant-numeric: tabular-nums;
+    flex: none;
+  }
+  .prod--control .prod__n { color: var(--teal); }
+  .prod__head h3 { font-size: 1.2rem; }
+  .prod__q {
+    display: block;
+    font-family: var(--display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.63rem;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .prod__line {
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .prod__features {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .prod__features li {
+    position: relative;
+    padding-left: 15px;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: var(--ink-2);
+  }
+  .prod__features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 5px;
+    height: 5px;
+    background: var(--brass);
+  }
+  .prod--control .prod__features li::before { background: var(--teal); }
+
+  .prod__foot {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px dashed var(--rule);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .prod__sectors {
+    font-family: var(--display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.62rem;
+    color: var(--muted);
+  }
+  .prod__link {
+    font-family: var(--display);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.68rem;
+    color: var(--brass);
+    text-decoration: none;
+  }
+  .prod--control .prod__link { color: var(--teal); }
+</style>
