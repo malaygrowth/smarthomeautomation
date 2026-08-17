@@ -2,10 +2,15 @@
 import Base from '../layouts/Base.astro';
 import SceneDemo from '../components/SceneDemo.astro';
 import SwitchPlate from '../components/SwitchPlate.astro';
-import { site, packages, whatsappLink } from '../data/site';
+import ServiceGlyph from '../components/ServiceGlyph.astro';
+import { site, packages, commitments, metrics, scenes, whatsappLink } from '../data/site';
 
 /** Keep the hero's price signal tied to the package data, never retyped. */
 const entry = packages[0];
+
+/** Room scenes leads the grid — it is the product, the rest is how it is built. */
+const feature = services.find((x) => x.slug === 'room-scenes')!;
+const rest = services.filter((x) => x.slug !== feature.slug);
 import { services } from '../data/services';
 import { u } from '../lib/url';
 ---
@@ -37,6 +42,25 @@ import { u } from '../lib/url';
     </div>
   </section>
 
+
+  <section class="creds" aria-label="What we commit to">
+    <div class="wrap">
+      <ul class="creds__list">
+        {
+          [...metrics, ...commitments].map((c) => (
+            <li>
+              <span class="creds__v">
+                {c.value}
+                {c.unit && <em>{c.unit}</em>}
+              </span>
+              <span class="creds__l">{c.label}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
   <section class="band">
     <div class="wrap">
       <div class="sechead"><h2 class="dsp">Try a scene</h2></div>
@@ -60,13 +84,29 @@ import { u } from '../lib/url';
   <section class="band band--paper" id="services">
     <div class="wrap">
       <div class="sechead"><h2 class="dsp">What we install</h2></div>
-      <div class="grid grid--3" style="margin-top:28px">
+      <div class="bento">
+        <a class="bento__feature" href={u(`/services/${feature.slug}/`)}>
+          <div class="bento__head">
+            <span class="eyebrow" style="color:#e0a24c">The one that matters</span>
+            <ServiceGlyph slug={feature.slug} onNight />
+          </div>
+          <h3 class="dsp">{feature.name}</h3>
+          <p class="bento__thesis">{feature.thesis}</p>
+          <p class="bento__lede">{feature.lede}</p>
+          <ul class="bento__scenes">
+            {scenes.map((sc) => <li>{sc.label}</li>)}
+            <li class="bento__scenes--more">and the ones only your house needs</li>
+          </ul>
+          <span class="bento__more">Read more &rarr;</span>
+        </a>
+
         {
-          services.map((s) => (
-            <a class="card" href={u(`/services/${s.slug}/`)}>
+          rest.map((s) => (
+            <a class="bento__tile" href={u(`/services/${s.slug}/`)}>
+              <ServiceGlyph slug={s.slug} />
               <h3 class="dsp">{s.name}</h3>
               <p>{s.thesis}</p>
-              <span class="price">Read more →</span>
+              <span class="bento__more">Read more &rarr;</span>
             </a>
           ))
         }

@@ -29,6 +29,28 @@ export function whatsappLink(context?: string) {
   return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(msg)}`;
 }
 
+/**
+ * The credibility strip.
+ *
+ * Deliberately built from COMMITMENTS rather than vanity metrics. "200 homes
+ * completed" is the industry convention and it is unverifiable — putting a
+ * number we cannot stand behind on a live site is a liability, not a trust
+ * signal. Everything below is a promise Infinita controls and already makes
+ * elsewhere on the site, so the two can never contradict each other.
+ *
+ * When there ARE real numbers — homes finished, years trading — add them to
+ * `metrics` and they render alongside. An empty array renders nothing.
+ */
+export const commitments = [
+  { value: '2–4', unit: 'days', label: 'On site for a typical home' },
+  { value: '24', unit: 'hours', label: 'On site if the house is not usable' },
+  { value: '1', unit: 'year', label: 'Warranty, and we handle the brands' },
+  { value: '₹0', unit: '', label: 'Survey before any quote' },
+];
+
+/** Real, verifiable counts. Add when you have them; renders only if non-empty. */
+export const metrics: { value: string; unit: string; label: string }[] = [];
+
 export type Package = {
   id: string;
   name: string;

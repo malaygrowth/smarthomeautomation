@@ -1,0 +1,96 @@
+---
+/**
+ * A small line drawing per service.
+ *
+ * The services grid was six identical cards, which is the weakest kind of
+ * layout: nothing tells the eye which of them matters. These glyphs come from
+ * the subject's own vocabulary — a plate, a window, a dimming ramp — drawn in
+ * the same hairline weight as the rest of the system, so the grid reads as a
+ * set of distinct things rather than six of the same thing.
+ */
+interface Props {
+  slug: string;
+  /** Renders light-on-dark for the feature tile */
+  onNight?: boolean;
+}
+const { slug, onNight = false } = Astro.props;
+const stroke = onNight ? '#e0a24c' : '#9a6420';
+const faint = onNight ? 'rgba(233,230,225,.28)' : 'rgba(20,23,28,.22)';
+---
+
+<svg
+  class="glyph"
+  viewBox="0 0 64 44"
+  fill="none"
+  stroke-width="1.6"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+>
+  {
+    slug === 'smart-switches' && (
+      <>
+        <rect x="14" y="6" width="36" height="32" rx="2" stroke={faint} />
+        <rect x="20" y="12" width="10" height="8" rx="1" stroke={stroke} />
+        <rect x="34" y="12" width="10" height="8" rx="1" stroke={faint} />
+        <rect x="20" y="24" width="10" height="8" rx="1" stroke={faint} />
+        <rect x="34" y="24" width="10" height="8" rx="1" stroke={stroke} />
+      </>
+    )
+  }
+  {
+    slug === 'smart-curtains' && (
+      <>
+        <rect x="10" y="6" width="44" height="32" rx="1" stroke={faint} />
+        <path d="M10 6v32M22 6v32" stroke={stroke} />
+        <path d="M54 6v32M42 6v32" stroke={stroke} />
+        <path d="M28 22h8m-8 0 3-3m-3 3 3 3m5-3-3-3m3 3-3 3" stroke={stroke} />
+      </>
+    )
+  }
+  {
+    slug === 'voice-and-app' && (
+      <>
+        <path d="M18 18v8M25 12v20M32 8v28M39 14v16M46 20v4" stroke={stroke} />
+      </>
+    )
+  }
+  {
+    slug === 'room-scenes' && (
+      <>
+        <circle cx="14" cy="22" r="5" stroke={faint} />
+        <circle cx="30" cy="22" r="5" stroke={stroke} />
+        <circle cx="30" cy="22" r="2.2" fill={stroke} stroke="none" />
+        <circle cx="46" cy="22" r="5" stroke={stroke} />
+        <circle cx="46" cy="22" r="5" fill={stroke} stroke="none" opacity="0.55" />
+      </>
+    )
+  }
+  {
+    slug === 'climate-and-environment' && (
+      <>
+        <path d="M12 30c4 0 4-8 8-8s4 8 8 8 4-10 8-10 4 10 8 10 4-6 8-6" stroke={stroke} />
+        <path d="M12 16c4 0 4-4 8-4s4 4 8 4" stroke={faint} />
+      </>
+    )
+  }
+  {
+    slug === 'security-and-entry' && (
+      <>
+        <rect x="20" y="19" width="24" height="18" rx="2" stroke={faint} />
+        <path d="M25 19v-5a7 7 0 0 1 14 0v5" stroke={stroke} />
+        <circle cx="32" cy="27" r="2.4" stroke={stroke} />
+        <path d="M32 29.4V32" stroke={stroke} />
+      </>
+    )
+  }
+</svg>
+
+<style>
+  .glyph {
+    width: 64px;
+    height: 44px;
+    display: block;
+    flex: none;
+  }
+</style>
