@@ -488,3 +488,36 @@ a.card:hover {
   padding: 7px 13px;
 }
 .nav-cta:hover { border-color: var(--brass); background: var(--brass-wash); }
+
+/* ---------- "what goes on your wall" ---------- */
+.walls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 34px;
+  margin-top: 32px;
+}
+.wall-col {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.wall-pair {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.wall-pair > * { flex: 1 1 190px; }
+.wall-note {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  align-items: flex-start;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+}
+.wall-note p {
+  font-size: 0.97rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 46ch;
+}

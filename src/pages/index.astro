@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import SceneDemo from '../components/SceneDemo.astro';
+import SwitchPlate from '../components/SwitchPlate.astro';
 import { site, packages, whatsappLink } from '../data/site';
 
 /** Keep the hero's price signal tied to the package data, never retyped. */
@@ -70,6 +71,67 @@ import { u } from '../lib/url';
           ))
         }
       </div>
+    </div>
+  </section>
+
+
+  <section class="band band--paper" id="wall">
+    <div class="wrap">
+      <div class="sechead"><h2 class="dsp">What goes on your wall</h2></div>
+      <div class="measure" style="margin-top:16px">
+        <p class="lede">
+          The question everybody asks at the survey, answered before you book
+          one. Two ways to do this, and your back boxes usually decide which.
+        </p>
+      </div>
+
+      <div class="walls">
+        <div class="wall-col">
+          <SwitchPlate
+            type="modular"
+            finish="plaster"
+            keys={['1', '2', '3', '4']}
+            live={[0, 2]}
+            caption="Retrofit — the plate you already own, untouched. Modules go in behind it."
+          />
+          <div class="wall-note">
+            <h3 class="dsp">Retrofit</h3>
+            <p>
+              Nothing on the wall changes. No chiselling, no repainting, no
+              matching new plates to old ones. Cheapest and fastest, and the
+              switches keep working exactly as your family expects.
+            </p>
+            <a class="btn btn--ghost" href={u('/journal/retrofit-modules-vs-touch-panels/')}>
+              Which suits my home?
+            </a>
+          </div>
+        </div>
+
+        <div class="wall-col">
+          <div class="wall-pair">
+            <SwitchPlate finish="plaster" caption="Plaster white" />
+            <SwitchPlate finish="graphite" caption="Graphite" />
+          </div>
+          <div class="wall-note">
+            <h3 class="dsp">Touch panel</h3>
+            <p>
+              Glass, with your scene names engraved on the wall itself — which
+              matters more than people expect, because guests and grandparents
+              press buttons, not apps. Needs a deeper back box, so we measure
+              before we promise.
+            </p>
+            <a class="btn btn--ghost" href={u('/services/smart-switches/')}>
+              About smart switches
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <p class="small" style="margin-top:20px">
+        Drawn to scale, not photographed — we would rather show you an honest
+        diagram than a stock photo of somebody else's living room. Finishes are
+        chosen against your scheme at the survey.
+      </p>
     </div>
   </section>
 

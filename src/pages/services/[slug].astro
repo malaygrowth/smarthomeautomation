@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import SwitchPlate from '../../components/SwitchPlate.astro';
 import { services } from '../../data/services';
 import { site, whatsappLink } from '../../data/site';
 
@@ -60,7 +61,39 @@ import { u } from '../../lib/url';
     </div>
   </section>
 
-  <section class="band band--paper">
+  {
+    service.slug === 'smart-switches' && (
+      <section class="band band--paper">
+        <div class="wrap">
+          <div class="sechead"><h2 class="dsp">The two options, drawn</h2></div>
+          <div class="walls">
+            <div class="wall-col">
+              <SwitchPlate
+                type="modular"
+                finish="plaster"
+                keys={['1', '2', '3', '4']}
+                live={[0, 2]}
+                caption="Retrofit — your existing plate, untouched."
+              />
+            </div>
+            <div class="wall-col">
+              <div class="wall-pair">
+                <SwitchPlate finish="plaster" caption="Panel, plaster white" />
+                <SwitchPlate finish="graphite" caption="Panel, graphite" />
+              </div>
+            </div>
+          </div>
+          <p class="small" style="margin-top:20px">
+            Drawn to scale rather than photographed. Bring your switchboard to
+            the survey — literally a photo of it — and we will tell you which of
+            these your back boxes will take.
+          </p>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="band">
     <div class="wrap">
       <div class="sechead"><h2 class="dsp">The specifics</h2></div>
       <dl class="spec" style="margin-top:26px">

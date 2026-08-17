@@ -1,0 +1,211 @@
+---
+/**
+ * A drawn switch plate.
+ *
+ * Competitor research finding: every established player in this market leads
+ * with photographs of the hardware — touch panels, curtain controllers, keypads
+ * — because the buyer's real question is "what ends up on my wall?" Our site had
+ * no answer to that at all, and we have no photography yet.
+ *
+ * So we draw it. It fills the gap honestly (a drawing is obviously a drawing,
+ * where a stock photo of somebody else's wall is a small lie), and it is the
+ * Switchplate design system made literal. Replace with real photography of
+ * finished installs when it exists — this component earns its keep until then.
+ */
+
+interface Props {
+  /** A glass touch panel, or the modular plate you already own */
+  type?: 'touch' | 'modular';
+  /** Which finish to render */
+  finish?: 'plaster' | 'graphite';
+  /** Key labels, top-left reading order */
+  keys?: string[];
+  /** Which keys read as on */
+  live?: number[];
+  caption?: string;
+}
+
+const {
+  type = 'touch',
+  finish = 'plaster',
+  keys = ['Ceiling', 'Lamps', 'Fan', 'Evening'],
+  live = [1, 3],
+  caption,
+} = Astro.props;
+---
+
+<figure class={`plate plate--${finish}`}>
+  <div class="plate__body">
+    <div class="plate__bezel">
+      {
+        type === 'touch' ? (
+          <>
+            <div class="plate__keys">
+              {keys.map((k, i) => (
+                <div class:list={['key', live.includes(i) && 'key--live']}>
+                  <span class="key__led" />
+                  <span class="key__label">{k}</span>
+                </div>
+              ))}
+            </div>
+            <span class="plate__brand">Infinita</span>
+          </>
+        ) : (
+          <div class="plate__rockers">
+            {keys.map((k, i) => (
+              <div class:list={['rocker', live.includes(i) && 'rocker--live']}>
+                <span class="rocker__throw" />
+              </div>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .plate {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* finishes — each is a self-contained token set */
+  .plate--plaster {
+    --face: linear-gradient(158deg, #fdfdfc 0%, #f1efea 52%, #e6e3dc 100%);
+    --edge: #cfcbc2;
+    --bezel: rgba(20, 23, 28, 0.07);
+    --key-face: rgba(255, 255, 255, 0.5);
+    --key-edge: rgba(20, 23, 28, 0.1);
+    --label: #5c5f66;
+    --label-live: #14171c;
+    --led-off: #cbc7bf;
+    --brand: rgba(20, 23, 28, 0.28);
+    --cast: 0 1px 2px rgba(20, 23, 28, 0.08), 0 18px 34px -20px rgba(20, 23, 28, 0.5);
+  }
+  .plate--graphite {
+    --face: linear-gradient(158deg, #33383f 0%, #23272d 52%, #171a1f 100%);
+    --edge: #454b53;
+    --bezel: rgba(255, 255, 255, 0.06);
+    --key-face: rgba(255, 255, 255, 0.045);
+    --key-edge: rgba(255, 255, 255, 0.09);
+    --label: #9aa1a9;
+    --label-live: #f2f0ec;
+    --led-off: #4a5058;
+    --brand: rgba(255, 255, 255, 0.22);
+    --cast: 0 1px 2px rgba(0, 0, 0, 0.5), 0 18px 34px -20px rgba(0, 0, 0, 0.9);
+  }
+
+  .plate__body {
+    background: var(--face);
+    border: 1px solid var(--edge);
+    border-radius: 3px;
+    padding: 9px;
+    box-shadow: var(--cast);
+    /* a 4M landscape plate, held to its real proportion at any width */
+    aspect-ratio: 8 / 5;
+    max-width: 320px;
+    width: 100%;
+  }
+  .plate__bezel {
+    height: 100%;
+    border: 1px solid var(--bezel);
+    border-radius: 2px;
+    padding: 13px 14px 9px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .plate__keys {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+  }
+  .key {
+    background: var(--key-face);
+    border: 1px solid var(--key-edge);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 10px;
+    min-width: 0;
+  }
+  .key__led {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--led-off);
+    flex: none;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+  .key--live .key__led {
+    background: #e0a24c;
+    box-shadow: 0 0 7px 1px rgba(224, 162, 76, 0.75);
+  }
+  .key__label {
+    font-family: var(--display);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    font-size: 0.63rem;
+    color: var(--label);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .key--live .key__label { color: var(--label-live); }
+
+  .plate__brand {
+    margin-top: 10px;
+    text-align: center;
+    font-family: var(--display);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.34em;
+    font-size: 0.5rem;
+    color: var(--brand);
+  }
+
+  /* the modular plate you already own — rockers, no labels, no brand */
+  .plate__rockers {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    align-items: center;
+  }
+  .rocker {
+    background: var(--key-face);
+    border: 1px solid var(--key-edge);
+    border-radius: 2px;
+    height: 74%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+  }
+  .rocker__throw {
+    display: block;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(20, 23, 28, 0.06), transparent);
+    border-bottom: 1px solid var(--key-edge);
+  }
+  .rocker--live .rocker__throw {
+    height: 50%;
+    margin-top: 50%;
+    border-bottom: 0;
+    border-top: 1px solid var(--key-edge);
+  }
+
+  figcaption {
+    font-size: 0.87rem;
+    line-height: 1.5;
+    color: var(--muted);
+    max-width: 34ch;
+  }
+</style>
